@@ -1,4 +1,4 @@
-# showtime
+# Showtime
 
 A new Flutter project.
 
