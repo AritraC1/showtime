@@ -1,0 +1,59 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
+import 'package:showtime/pages/details.dart';
+import 'package:showtime/utils/constants.dart';
+
+class TrendingSlider extends StatelessWidget {
+  final AsyncSnapshot snapshot;
+
+  const TrendingSlider({
+    super.key,
+    required this.snapshot,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: CarouselSlider.builder(
+        itemCount: snapshot.data!.length,
+        options: CarouselOptions(
+          // aspectRatio: 2 / 3,
+          height: 300,
+          autoPlay: true,
+          viewportFraction: 0.55,
+          enlargeCenterPage: true,
+          pageSnapping: true,
+
+          autoPlayCurve: Curves.fastOutSlowIn,
+          autoPlayAnimationDuration: const Duration(seconds: 1),
+        ),
+        itemBuilder: (context, itemIndex, pageViewIndex) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  // for ios - CupertinoPageRoute
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        Details(movie: snapshot.data[itemIndex]),
+                  ));
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(14),
+              child: SizedBox(
+                height: 300,
+                width: 210,
+                child: Image.network(
+                  filterQuality: FilterQuality.high,
+                  fit: BoxFit.cover,
+                  '${Constants.imagePath}${snapshot.data[itemIndex].posterPath}',
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
