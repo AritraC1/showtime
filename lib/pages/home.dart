@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:showtime/api/api.dart';
 import 'package:showtime/models/movie.dart';
+import 'package:showtime/pages/movies_screen.dart';
+import 'package:showtime/pages/tvseries_screen.dart';
+import 'package:showtime/utils/colors.dart';
 import 'package:showtime/widgets/movies_slider.dart';
 import 'package:showtime/widgets/trending_slider.dart';
 
@@ -13,17 +16,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late Future<List<Movie>> trendingMovies;
-  late Future<List<Movie>> topRatedMovies;
-  late Future<List<Movie>> upcomingMovies;
+  int myIndex = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    trendingMovies = Api().getTrendingMovies();
-    topRatedMovies = Api().getTopRatedMovies();
-    upcomingMovies = Api().getUpcomingMovies();
-  }
+  List<Widget> widgetList = [MoviesScreen(), TVSeriesScreen()];
 
   @override
   Widget build(BuildContext context) {
@@ -40,100 +35,30 @@ class _HomeState extends State<Home> {
           filterQuality: FilterQuality.high,
         ),
         centerTitle: true,
+
+        
       ),
 
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // TRENDING MOVIES
-              Text(
-                "Trending Movies",
-                style: GoogleFonts.aBeeZee(
-                    fontSize: 27, fontWeight: FontWeight.bold),
-              ),
+      body: IndexedStack(
+        index: myIndex,
+        children: widgetList,
+      ),
 
-              const SizedBox(height: 30),
-              SizedBox(
-                child: FutureBuilder(
-                  future: trendingMovies,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text(snapshot.error.toString()),
-                      );
-                    } else if (snapshot.hasData) {
-                      return TrendingSlider(snapshot: snapshot);
-                    } else {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  },
-                ),
-              ),
-              const SizedBox(height: 35),
-
-              // TOP RATED MOVIES
-              Text(
-                'Top Rated Movies',
-                style: GoogleFonts.aBeeZee(
-                    fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-
-              const SizedBox(height: 20),
-              SizedBox(
-                child: FutureBuilder(
-                  future: topRatedMovies,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text(snapshot.error.toString()),
-                      );
-                    } else if (snapshot.hasData) {
-                      return MoviesSlider(snapshot: snapshot);
-                    } else {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  },
-                ),
-              ),
-              const SizedBox(height: 35),
-
-              // UPCOMING MOVIES
-              Text(
-                'Upcoming Movies',
-                style: GoogleFonts.aBeeZee(
-                    fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-
-              const SizedBox(height: 20),
-              SizedBox(
-                child: FutureBuilder(
-                  future: upcomingMovies,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text(snapshot.error.toString()),
-                      );
-                    } else if (snapshot.hasData) {
-                      return MoviesSlider(snapshot: snapshot);
-                    } else {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: myIndex,
+        backgroundColor: Colours.scaffoldBgColor,
+        selectedItemColor: Colors.red,
+        unselectedItemColor: Colors.white,
+        items: const [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.video_camera_back), label: 'Movies'),
+          BottomNavigationBarItem(icon: Icon(Icons.tv), label: 'TV Series'),
+        ],
+        onTap: (index) {
+          setState(() {
+            myIndex = index;
+          });
+        },
       ),
     );
   }
