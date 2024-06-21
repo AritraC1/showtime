@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:showtime/pages/details.dart';
 import 'package:showtime/utils/constants.dart';
 
-class TrendingSlider extends StatelessWidget {
+class TrendingSeriesSlider extends StatelessWidget {
   final AsyncSnapshot snapshot;
 
-  const TrendingSlider({
+  const TrendingSeriesSlider({
     super.key,
     required this.snapshot,
   });
@@ -35,8 +35,8 @@ class TrendingSlider extends StatelessWidget {
                   context,
                   // for ios - CupertinoPageRoute
                   MaterialPageRoute(
-                    builder: (context) => Details(
-                      movie: snapshot.data[itemIndex],
+                    builder: (context) => DetailsSeries(
+                      series: snapshot.data[itemIndex],
                     ),
                   ));
             },

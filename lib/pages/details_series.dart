@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:showtime/models/movie.dart';
+import 'package:showtime/models/series.dart';
 import 'package:showtime/utils/colors.dart';
 import 'package:showtime/utils/constants.dart';
 
-class Details extends StatelessWidget {
-  final Movie movie;
+class DetailsSeries extends StatelessWidget {
+  final Series series;
 
-  const Details({super.key, required this.movie});
+  const DetailsSeries({super.key, required this.series});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class Details extends StatelessWidget {
             floating: true,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
-                movie.title,
+                series.name,
                 style: GoogleFonts.poppins(
                     fontSize: 18, fontWeight: FontWeight.w700),
               ),
@@ -31,7 +31,7 @@ class Details extends StatelessWidget {
                     bottomLeft: Radius.circular(24),
                     bottomRight: Radius.circular(24)),
                 child: Image.network(
-                  '${Constants.imagePath}${movie.backdropPath}',
+                  '${Constants.imagePath}${series.backdropPath}',
                   filterQuality: FilterQuality.high,
                   fit: BoxFit.cover,
                 ),
@@ -53,7 +53,7 @@ class Details extends StatelessWidget {
                     height: 16,
                   ),
                   Text(
-                    movie.overview,
+                    series.overview,
                     style: GoogleFonts.poppins(
                         fontSize: 22, fontWeight: FontWeight.normal),
                     textAlign: TextAlign.justify,
@@ -79,7 +79,7 @@ class Details extends StatelessWidget {
                                     fontSize: 17, fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                movie.releaseDate,
+                                series.releaseDate,
                                 style: GoogleFonts.poppins(
                                     fontSize: 17, fontWeight: FontWeight.w600),
                               )
@@ -102,7 +102,7 @@ class Details extends StatelessWidget {
                                 Icons.star,
                                 color: Colors.amber,
                               ),
-                              Text('${movie.rating.toStringAsFixed(1)}/10')
+                              Text('${series.rate.toStringAsFixed(1)}/10')
                             ],
                           ),
                         )

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:showtime/pages/details.dart';
+import 'package:showtime/pages/details_series.dart';
 import 'package:showtime/utils/constants.dart';
 
-class MoviesSlider extends StatelessWidget {
+class SeriesSlider extends StatelessWidget {
   final AsyncSnapshot snapshot;
 
-  const MoviesSlider({
+  const SeriesSlider({
     super.key,
     required this.snapshot,
   });
@@ -27,9 +27,8 @@ class MoviesSlider extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Details(
-                        movie: snapshot.data[index],
-                      ),
+                      builder: (context) => DetailsSeries(
+                          series: snapshot.data[index]),
                     ));
               },
               child: ClipRRect(
