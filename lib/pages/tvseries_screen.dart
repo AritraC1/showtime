@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:showtime/api/api.dart';
 import 'package:showtime/models/series.dart';
+import 'package:showtime/widgets/movies_slider.dart';
+import 'package:showtime/widgets/trending_slider.dart';
 
 class TVSeriesScreen extends StatefulWidget {
   const TVSeriesScreen({super.key});
@@ -33,15 +35,87 @@ class _TVSeriesScreenState extends State<TVSeriesScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // TRENDING SERIES
+              // TRENDING MOVIES
               Text(
                 "Trending Series",
                 style: GoogleFonts.aBeeZee(
                     fontSize: 27, fontWeight: FontWeight.bold),
               ),
+
               const SizedBox(height: 30),
               SizedBox(
-                child: FutureBuilder(future: future, builder: builder),
+                child: FutureBuilder(
+                  future: trendingSeries,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text(snapshot.error.toString()),
+                      );
+                    } else if (snapshot.hasData) {
+                      return TrendingSlider(snapshot: snapshot);
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
+                ),
+              ),
+              const SizedBox(height: 35),
+
+              // TOP RATED MOVIES
+              Text(
+                'Top Rated Movies',
+                style: GoogleFonts.aBeeZee(
+                    fontSize: 30, fontWeight: FontWeight.bold),
+              ),
+
+              const SizedBox(height: 20),
+              SizedBox(
+                child: FutureBuilder(
+                  future: topRatedSeries,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text(snapshot.error.toString()),
+                      );
+                    } else if (snapshot.hasData) {
+                      return MoviesSlider(snapshot: snapshot);
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
+                ),
+              ),
+              const SizedBox(height: 35),
+
+              // UPCOMING MOVIES
+              Text(
+                'Upcoming Movies',
+                style: GoogleFonts.aBeeZee(
+                    fontSize: 30, fontWeight: FontWeight.bold),
+              ),
+
+              const SizedBox(height: 20),
+              SizedBox(
+                child: FutureBuilder(
+                  future: upcomingSeries,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text(snapshot.error.toString()),
+                      );
+                    } else if (snapshot.hasData) {
+                      return MoviesSlider(snapshot: snapshot);
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
+                ),
               ),
             ],
           ),
