@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:showtime/models/movie.dart';
+import 'package:showtime/models/series.dart';
 import 'package:showtime/utils/colors.dart';
 import 'package:showtime/utils/constants.dart';
 
 class Details extends StatelessWidget {
   final Movie movie;
+  final Series series;
 
-  const Details({super.key, required this.movie, required series});
+  const Details({super.key, required this.movie, required this.series});
 
   @override
   Widget build(BuildContext context) {

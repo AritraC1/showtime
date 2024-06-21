@@ -5,8 +5,7 @@ class Series {
   String posterPath;
   String backdropPath;
   String releaseDate;
-  String rate;
-  // String id;
+  double rate;
 
   Series({
     required this.name,
@@ -16,19 +15,17 @@ class Series {
     required this.backdropPath,
     required this.releaseDate,
     required this.rate,
-    // required this.id,
   });
 
   factory Series.fromJson(Map<String, dynamic> json) {
     return Series(
-        name: json["name"],
-        originalName: json["original_name"],
-        overview: json["overview"],
-        posterPath: json["poster_path"],
-        backdropPath: json["backdrop_path"],
-        releaseDate: json["first_air_date"],
-        rate: json["vote_average"]
-        // id: json["id"]
-        );
+      name: json["name"],
+      originalName: json["original_name"],
+      overview: json["overview"],
+      posterPath: json["poster_path"],
+      backdropPath: json["backdrop_path"],
+      releaseDate: json["first_air_date"],
+      rate: json["vote_average"],
+    );
   }
 }
