@@ -27,8 +27,9 @@ class MoviesSlider extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          Details(movie: snapshot.data[index]),
+                      builder: (context) => Details(
+                          movie: snapshot.data[index],
+                          series: snapshot.data[index]),
                     ));
               },
               child: ClipRRect(

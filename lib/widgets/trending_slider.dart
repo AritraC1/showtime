@@ -35,8 +35,10 @@ class TrendingSlider extends StatelessWidget {
                   context,
                   // for ios - CupertinoPageRoute
                   MaterialPageRoute(
-                    builder: (context) =>
-                        Details(movie: snapshot.data[itemIndex]),
+                    builder: (context) => Details(
+                      movie: snapshot.data[itemIndex],
+                      series: snapshot.data[itemIndex],
+                    ),
                   ));
             },
             child: ClipRRect(

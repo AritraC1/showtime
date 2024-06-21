@@ -65,7 +65,7 @@ class _TVSeriesScreenState extends State<TVSeriesScreen> {
 
               // TOP RATED MOVIES
               Text(
-                'Top Rated Movies',
+                'Top Rated Series',
                 style: GoogleFonts.aBeeZee(
                     fontSize: 30, fontWeight: FontWeight.bold),
               ),
@@ -93,7 +93,7 @@ class _TVSeriesScreenState extends State<TVSeriesScreen> {
 
               // UPCOMING MOVIES
               Text(
-                'Upcoming Movies',
+                'Upcoming Series',
                 style: GoogleFonts.aBeeZee(
                     fontSize: 30, fontWeight: FontWeight.bold),
               ),
