@@ -7,7 +7,7 @@ import 'package:showtime/utils/constants.dart';
 class Details extends StatelessWidget {
   final Movie movie;
 
-  const Details({super.key, required this.movie});
+  const Details({super.key, required this.movie, required series});
 
   @override
   Widget build(BuildContext context) {

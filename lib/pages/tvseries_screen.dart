@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:showtime/api/api.dart';
+import 'package:showtime/models/series.dart';
 
 class TVSeriesScreen extends StatefulWidget {
   const TVSeriesScreen({super.key});
@@ -9,6 +11,18 @@ class TVSeriesScreen extends StatefulWidget {
 }
 
 class _TVSeriesScreenState extends State<TVSeriesScreen> {
+  late Future<List<Series>> trendingSeries;
+  late Future<List<Series>> topRatedSeries;
+  late Future<List<Series>> upcomingSeries;
+
+  @override
+  void initState() {
+    super.initState();
+    trendingSeries = Api().getTrendingSeries();
+    topRatedSeries = Api().getTopRatedSeries();
+    upcomingSeries = Api().getUpcomingSeries();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
