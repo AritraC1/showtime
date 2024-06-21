@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:showtime/api/api.dart';
-import 'package:showtime/models/movie.dart';
 import 'package:showtime/pages/movies_screen.dart';
 import 'package:showtime/pages/tvseries_screen.dart';
 import 'package:showtime/utils/colors.dart';
-import 'package:showtime/widgets/movies_slider.dart';
-import 'package:showtime/widgets/trending_slider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -18,7 +13,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int myIndex = 0;
 
-  List<Widget> widgetList = [MoviesScreen(), TVSeriesScreen()];
+  List<Widget> widgetList = const [MoviesScreen(), TVSeriesScreen()];
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +30,6 @@ class _HomeState extends State<Home> {
           filterQuality: FilterQuality.high,
         ),
         centerTitle: true,
-
-        
       ),
 
       body: IndexedStack(
